@@ -4,12 +4,23 @@ on:
   push:
     branches:
       - main
+  pull_request:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+      - name: Generate content
+        run: |
+          echo "Content generation happens via Hermes cron jobs pushing to this repo"
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
